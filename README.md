@@ -2,7 +2,7 @@
 
 [![Latest Release](https://img.shields.io/github/release/unknowns24/gominatim.svg)](https://github.com/unknowns24/gominatim/releases)
 [![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://godoc.org/github.com/unknowns24/gominatim)
-[![Coverage Status](https://coveralls.io/repos/github/unknowns24/gominatim/badge.svg?branch=master)](https://coveralls.io/github/unknowns24/gominatim?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Unknowns24/gominatim/badge.svg?branch=main)](https://coveralls.io/github/Unknowns24/gominatim?branch=main)
 
 
 ## Contributions
