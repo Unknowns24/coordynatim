@@ -1,6 +1,8 @@
 package gominatim
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 func (g *Gominatim) Search(parameters SearchParameters) (GeoJSONResult, error) {
 	var geoJSONResp GeoJSONResult

@@ -13,13 +13,14 @@ func main() {
 		return
 	}
 
-	res, err := geocoder.Search(gominatim.SearchParameters{Street: "Almirante Brown 79", Country: "Argentina", City: "San Nicolas de los Arroyos", PostalCode: "2900"})
+	res, err := geocoder.Search(gominatim.SearchParameters{Street: "Falcon 357", Country: "Argentina", City: "San Nicolas de los Arroyos", PostalCode: "2900"})
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
 	for _, feature := range res.Features {
+		fmt.Println(feature.Properties.Geocoding.Type)
 		fmt.Println(feature.Geometry.Coordinates)
 	}
 }
