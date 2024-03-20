@@ -1,6 +1,6 @@
 # Gominatim - Go library to access nominatim geocoding services
 
-[![Latest Release](https://img.shields.io/github/release/muesli/gominatim.svg)](https://github.com/unknowns24/gominatim/releases)
+[![Latest Release](https://img.shields.io/github/release/unknowns24/gominatim.svg)](https://github.com/unknowns24/gominatim/releases)
 [![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://godoc.org/github.com/unknowns24/gominatim)
 [![Coverage Status](https://coveralls.io/repos/github/muesli/gominatim/badge.svg?branch=master)](https://coveralls.io/github/unknowns24/gominatim?branch=master)
 
