@@ -25,7 +25,6 @@ type GeoJSONFeature struct {
 			OsmType string `json:"osm_type"`
 			OsmID   int    `json:"osm_id"`
 			Type    string `json:"type"`
-			Label   string `json:"label"`
 			Name    string `json:"name"`
 		} `json:"geocoding"`
 	} `json:"properties"`
@@ -53,8 +52,9 @@ type Gominatim struct {
 type SearchParameters struct {
 	Q          string
 	City       string
-	PostalCode string
+	Street     string
 	Country    string
+	PostalCode string
 }
 
 func (s *SearchParameters) ToQuery() string {
@@ -66,6 +66,9 @@ func (s *SearchParameters) ToQuery() string {
 	} else {
 		if s.City != "" {
 			queryURLParts = append(queryURLParts, fmt.Sprintf("city=%s", url.QueryEscape(s.City)))
+		}
+		if s.Street != "" {
+			queryURLParts = append(queryURLParts, fmt.Sprintf("street=%s", url.QueryEscape(s.Street)))
 		}
 		if s.Country != "" {
 			queryURLParts = append(queryURLParts, fmt.Sprintf("country=%s", url.QueryEscape(s.Country)))
