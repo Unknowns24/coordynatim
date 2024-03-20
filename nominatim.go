@@ -1,28 +1,55 @@
 package gominatim
 
 import (
-	"strings"
+	"fmt"
+	"io"
+	"net/http"
 )
 
-var (
-	server string
-)
-
-type Address struct {
-	House       string `json:"house_number"`
-	Road        string `json:"road"`
-	Village     string `json:"village"`
-	Suburb      string `json:"suburb"`
-	Town        string `json:"town"`
-	City        string `json:"city"`
-	State       string `json:"state"`
-	County      string `json:"state_district"`
-	Postcode    string `json:"postcode"`
-	Country     string `json:"country"`
-	CountryCode string `json:"country_code"`
+func DefaultConfig() Config {
+	return Config{
+		UserAgent: "gominatim",
+		Endpoint:  "https://nominatim.openstreetmap.org",
+	}
 }
 
-func SetServer(srv string) {
-	srv = strings.TrimRight(srv, "/")
-	server = srv
+func NewGominatim(config Config) (*Gominatim, error) {
+	if config.Endpoint == "" {
+		return nil, fmt.Errorf("endpoint must not be empty")
+	}
+	if config.UserAgent == "" {
+		return nil, fmt.Errorf("userAgent must not be empty")
+	}
+
+	g := Gominatim{
+		config: config,
+	}
+
+	return &g, nil
+}
+
+func (g *Gominatim) request(parameters SearchParameters) ([]byte, error) {
+	requestURL := fmt.Sprintf("%s/search?%s&format=geocodejson&limit=1",
+		g.config.Endpoint,
+		parameters.ToQuery(),
+	)
+
+	req, err := http.NewRequest("GET", requestURL, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("User-Agent", g.config.UserAgent)
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	respBytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return respBytes, nil
 }
