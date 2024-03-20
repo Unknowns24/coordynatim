@@ -10,10 +10,6 @@ If you want to determine the coordinates of a certain location by only having it
 name, you can do this via a geocoding service. If you want to do this in Go, you
 probably want to use gominatim to do it.
 
-## License
-
-[LGPLv3](https://www.gnu.org/licenses/lgpl.html)
-
 ## Features
 
 The plan is to cover everything this site documents:
@@ -23,8 +19,6 @@ The plan is to cover everything this site documents:
 -   [x] Reverse Geocoding
 
 ## Contributions
-
-…Are welcome :)
 
 If you want to add anything, do it and submit a pull-request.
 Please add Tests for your additions!
