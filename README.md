@@ -6,13 +6,14 @@
 
 ## Description
 
-The purpose of this library is bring to the DEVs the necesary tools to easily find the coords behind an address.
+The purpose of this library is to provide developers with the necessary tools to easily find the coordinates behind an address.
 
 > [!IMPORTANT]
 > This library includes the implementation of nominatim API and Google Maps API.
 > Why? Simple, nominatim is free but it cannot get all address cordinates so we complement the ones that nominatim cannot resolve with google maps geocode api.
-> At the date of writing this (24/03/2024) with the free cuota of google we have 40k free request to geocoding api.
 
+> [!NOTE]
+> At the date of writing this (24/03/2024) with the free cuota of google we have 40k free request to geocoding api.
 > See the [Google Maps Pricing table](https://mapsplatform.google.com/pricing/) to know the actual price of geocoding api
 
 ## Examples
