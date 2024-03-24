@@ -1,83 +1,32 @@
-package gominatim
+package coordynatim
 
 import (
 	"fmt"
-	"net/url"
-	"strings"
+
+	"googlemaps.github.io/maps"
 )
 
-type Config struct {
-	UserAgent string
-	Endpoint  string
-}
+type (
+	Coordynatim struct {
+		config       Config
+		googleClient *maps.Client
+	}
 
-type Coordinate float64
+	Config struct {
+		UserAgent string
+		Endpoint  string
+
+		GoogleMapsAPI string
+	}
+
+	AddressCoords struct {
+		Lat Coordinate `json:"lat"`
+		Lon Coordinate `json:"lon"`
+	}
+
+	Coordinate float64
+)
 
 func (c *Coordinate) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf("%.5f", float64(*c))), nil
-}
-
-type GeoJSONFeature struct {
-	Type       string `json:"type"`
-	Properties struct {
-		Geocoding struct {
-			PlaceID int    `json:"place_id"`
-			OsmType string `json:"osm_type"`
-			OsmID   int    `json:"osm_id"`
-			Type    string `json:"type"`
-			Name    string `json:"name"`
-		} `json:"geocoding"`
-	} `json:"properties"`
-	Geometry struct {
-		Type        string       `json:"type"`
-		Coordinates []Coordinate `json:"coordinates"`
-	} `json:"geometry"`
-}
-
-type GeoJSONResult struct {
-	Type      string `json:"type"`
-	Geocoding struct {
-		Version     string `json:"version"`
-		Attribution string `json:"attribution"`
-		Licence     string `json:"licence"`
-		Query       string `json:"query"`
-	} `json:"geocoding"`
-	Features []GeoJSONFeature `json:"features"`
-}
-
-type Gominatim struct {
-	config Config
-}
-
-type SearchParameters struct {
-	Q          string
-	City       string
-	Street     string
-	Country    string
-	PostalCode string
-}
-
-func (s *SearchParameters) ToQuery() string {
-
-	queryURLParts := []string{}
-
-	if s.Q != "" {
-		queryURLParts = append(queryURLParts, fmt.Sprintf("q=%s", url.QueryEscape(s.Q)))
-	} else {
-		if s.City != "" {
-			queryURLParts = append(queryURLParts, fmt.Sprintf("city=%s", url.QueryEscape(s.City)))
-		}
-		if s.Street != "" {
-			queryURLParts = append(queryURLParts, fmt.Sprintf("street=%s", url.QueryEscape(s.Street)))
-		}
-		if s.Country != "" {
-			queryURLParts = append(queryURLParts, fmt.Sprintf("country=%s", url.QueryEscape(s.Country)))
-		}
-		if s.PostalCode != "" {
-			queryURLParts = append(queryURLParts, fmt.Sprintf("postalcode=%s", url.QueryEscape(s.PostalCode)))
-		}
-	}
-
-	return strings.Join(queryURLParts, "&")
-
 }
