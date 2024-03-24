@@ -3,24 +3,21 @@ package main
 import (
 	"fmt"
 
-	"github.com/unknowns24/gominatim"
+	"github.com/unknowns24/coordynatim"
 )
 
 func main() {
-	geocoder, err := gominatim.NewGominatim(gominatim.DefaultConfig())
+	geocoder, err := coordynatim.NewCoordynatim(coordynatim.DefaultConfigWithGoogleMapsAPI("YOUR_API_KEY"))
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	res, err := geocoder.Search(gominatim.SearchParameters{Street: "Falcon 357", Country: "Argentina", City: "San Nicolas de los Arroyos", PostalCode: "2900"})
+	res, err := geocoder.GetHouseAddressCoords(coordynatim.SearchParameters{Street: "Alvear 1053", Country: "Argentina", City: "San Nicolas de los Arroyos", Region: "Buenos Aires", PostalCode: "2900"})
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	for _, feature := range res.Features {
-		fmt.Println(feature.Properties.Geocoding.Type)
-		fmt.Println(feature.Geometry.Coordinates)
-	}
+	fmt.Println(res)
 }
